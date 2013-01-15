@@ -1,4 +1,4 @@
-# the forecast JSON object
+# A sample of the JSON object returned
 
 forecast =
   time0:
