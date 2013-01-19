@@ -10,13 +10,19 @@ class Noaa
     query = querystring.stringify {
       zipCodeList: zip
       product: 'time-series'
-      maxt: 'maxt'
-      dew: 'dew'}
+      temp: 'temp'
+      dew: 'dew',
+      pop12: 'pop12',
+      wspd: 'wspd',
+      sky: 'sky',
+      wx: 'wx'
+    }
 
     request @base_url + query, (err,res,body) ->
       callback(body)
 
   get_forecast_by_coordinates: (lat,lon) ->
+
 
 root = exports ? window
 root.Noaa = Noaa
