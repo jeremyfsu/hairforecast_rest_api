@@ -1,15 +1,19 @@
-#{HairForecast} = require '../src/hairforecast'
+{HairForecast} = require '../src/hairforecast'
 fs = require 'fs'
-xml = require 'node-xml-lite'
 chai = require 'chai'
 chai.should()
 
+noaa_sample = fs.readFileSync './test/noaa_sample.xml', 'utf-8'
+hf = new HairForecast
+
 describe 'HairForecast', ->
-  before (done) ->
-    fs.readFile './test/noaa_sample.xml', (err, data) =>
-      @noaa_sample = data
-      done()
+  it 'should have a forecast JSON object as a property', ->
+    hf.forecast.should.have.deep.property 'time0.hairforecast'
 
   it 'should parse NOAA XML response into a JSON object', ->
-    console.log @noaa_sample
-    @noaa_sample.should.not.equal null
+    forecast = hf.parse_noaa noaa_sample
+    forecast.should.have.property('name').equal 'dwml'
+
+  it 'should humanize time of day', ->
+    hf.humanize_time("2013-01-18T07:00:00-05:00").should.equal "This Morning"
+    hf.humanize_time("2013-01-19T07:00:00-05:00").should.equal "Tomorrow Morning"
