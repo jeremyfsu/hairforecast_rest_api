@@ -7,9 +7,9 @@ noaa_sample = fs.readFileSync './test/noaa_sample.xml', 'utf-8'
 hf = new HairForecast(noaa_sample)
 
 describe 'HairForecast', ->
-  it 'should convert the NOAA XML into a JSON objext', ->
+  it 'should convert the NOAA XML into a JSON object', ->
     hf.noaa.should.have.property('name').equal 'dwml'
-
+    console.log hf.forecast.start_time
   it 'should have a forecast JSON object as a property', ->
     hf.forecast.should.have.deep.property 'time0.hairforecast'
 

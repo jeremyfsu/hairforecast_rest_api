@@ -1,9 +1,10 @@
 xml = require 'node-xml-lite'
 
 class HairForecast
-  constructor: (noaa_xml) ->
-    @noaa = noaa_xml
 
+  constructor: (noaa_xml) ->
+    @noaa = xml.parseString noaa_xml
+    
     data = {
       period: null
       hairforecast: null
@@ -11,6 +12,7 @@ class HairForecast
       weather: null }
     
     @forecast = {
+      start_time: new Date(Date.parse @noaa.childs[0].childs[0].childs[3].childs[0])
       time0: data
       time1: data
       time2: data
@@ -18,12 +20,8 @@ class HairForecast
       time4: data
       time5: data }
     
-    parse_noaa()
-      
-  parse_noaa: () ->
-    xml.parseString @noaa
-
   humanize_time: (t) ->
+
     
 
 root = exports ? window
