@@ -22,7 +22,5 @@ class HairForecast
     
   humanize_time: (t) ->
 
-    
-
 root = exports ? window
 root.HairForecast = HairForecast
