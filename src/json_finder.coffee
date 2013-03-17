@@ -1,19 +1,24 @@
 class JsonFinder
 
   constructor: (json) ->
-    @json = json
-
-  recurse_children: (name, obj) ->
+    @json = JSON.parse json
+  
+  descend: (name, obj) ->
     if obj.name == name
       return obj.childs
     else
-      obj.childs.every (child) ->
-        this.recurse_children(name,child)
+      for i in [0..obj.childs.length - 1]
+        if typeof(obj.childs[i]) == "string"
+          break
+        result = this.descend(name, obj.childs[i])
+        if typeof(result) != 'undefined'
+          return result
 
   get_attr: (name) ->
+    "not impleneted yet"
 
   get_children: (name) ->
-    return this.recurse_children(name,@json)
+    return this.descend(name, @json)
 
 root = exports ? window
 root.JsonFinder = JsonFinder
