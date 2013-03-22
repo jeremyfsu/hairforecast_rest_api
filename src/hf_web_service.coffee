@@ -8,5 +8,4 @@ class HFWebService
 
     app.listen(options.port)
 
-root = exports ? window
-root.HFWebService = HFWebService
+exports = HFWebService

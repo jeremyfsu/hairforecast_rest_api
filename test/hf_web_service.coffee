@@ -1,4 +1,4 @@
-{HFWebService} = require '../src/hf_web_service'
+HFWebService = require '../src/hf_web_service'
 request = require 'request'
 chai = require 'chai'
 chai.should()
