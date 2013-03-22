@@ -5,22 +5,21 @@ class HairForecast
   constructor: (noaa_xml) ->
     @noaa = xml.parseString noaa_xml
     
-    data = {
+    data = 
       period: null
       hairforecast: null
       temp: null
-      weather: null }
+      weather: null 
     
-    @forecast = {
+    @forecast = 
       start_time: new Date(Date.parse @noaa.childs[0].childs[0].childs[3].childs[0])
       time0: data
       time1: data
       time2: data
       time3: data
       time4: data
-      time5: data }
+      time5: data 
     
   humanize_time: (t) ->
 
-root = exports ? window
-root.HairForecast = HairForecast
+exports = HairForecast

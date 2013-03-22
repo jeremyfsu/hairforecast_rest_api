@@ -15,10 +15,9 @@ class JsonFinder
           return result
 
   get_attr: (name) ->
-    "not impleneted yet"
+    throw new Error "not impleneted yet"
 
   get_children: (name) ->
     return this.descend(name, @json)
 
-root = exports ? window
-root.JsonFinder = JsonFinder
+exports = JsonFinder
