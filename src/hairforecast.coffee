@@ -1,24 +1,28 @@
 xml = require 'node-xml-lite'
+{JsonFinder} = require '../src/json_finder'
 
+class HairForecastData
+  constructor: -> {
+    period: null
+    hairforecast: null
+    temp: null
+    weather: null }
+    
 class HairForecast
 
   constructor: (noaa_xml) ->
-    @noaa = xml.parseString noaa_xml
-    
-    data = {
-      period: null
-      hairforecast: null
-      temp: null
-      weather: null }
+    json = xml.parseString noaa_xml
+    @noaa = new JsonFinder(json)
     
     @forecast = {
-      start_time: new Date(Date.parse @noaa.childs[0].childs[0].childs[3].childs[0])
-      time0: data
-      time1: data
-      time2: data
-      time3: data
-      time4: data
-      time5: data }
+      #start_time: new Date(Date.parse @noaa.get_children("time-layout"))
+      time0: new HairForecastData
+      time1: new HairForecastData
+      time2: new HairForecastData
+      time3: new HairForecastData
+      time4: new HairForecastData
+      time5: new HairForecastData
+    }
     
   humanize_time: (t) ->
 
